@@ -1,0 +1,1914 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="4.0" jmeter="4.0 r1823414">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="cost controller" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="update stock levels" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="JDBC Connection Configuration" enabled="true">
+          <boolProp name="autocommit">true</boolProp>
+          <stringProp name="checkQuery"></stringProp>
+          <stringProp name="connectionAge">500</stringProp>
+          <stringProp name="dataSource">test</stringProp>
+          <stringProp name="dbUrl">jdbc:mysql://hq-db-weekly01-b55.stagealot.com:3306/take2</stringProp>
+          <stringProp name="driver">com.mysql.jdbc.Driver</stringProp>
+          <boolProp name="keepAlive">true</boolProp>
+          <stringProp name="password">t4k32_b3sp0k3</stringProp>
+          <stringProp name="poolMax">0</stringProp>
+          <stringProp name="timeout">100</stringProp>
+          <stringProp name="transactionIsolation">DEFAULT</stringProp>
+          <stringProp name="trimInterval">600</stringProp>
+          <stringProp name="username">take2_bespoke</stringProp>
+        </JDBCDataSource>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Activate products" enabled="true">
+          <stringProp name="dataSource">test</stringProp>
+          <stringProp name="query">update products  set active =1, `OutOfStock` =0, `SupplierStock`=20, `qtyInStockCpt`=0 where idProduct in (51941991, 53587835, 53588105,59669553,45019030,59723050);
+
+
+</stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="queryType">Update Statement</stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="JHB products" enabled="true">
+          <stringProp name="dataSource">test</stringProp>
+          <stringProp name="query">update products  set qtyInStock =100, `qtyInStockJhb`=50 where idProduct in (59669553,45019030,59723050); </stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="queryType">Update Statement</stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="CPT products" enabled="true">
+          <stringProp name="dataSource">test</stringProp>
+          <stringProp name="query">update products  set qtyInStock =100, `qtyInStockCpt`=50 where idProduct in (59669553,45019030,59723050); </stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="queryType">Update Statement</stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="JHB IBT products" enabled="true">
+          <stringProp name="dataSource">test</stringProp>
+          <stringProp name="query">update products  set qtyInStock =50, `qtyInStockJhb`=50,`qtyInStockCpt`=0 where idProduct in (51941991,59669553); </stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="queryType">Update Statement</stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <JDBCSampler guiclass="TestBeanGUI" testclass="JDBCSampler" testname="Lead time products" enabled="true">
+          <stringProp name="dataSource">test</stringProp>
+          <stringProp name="query">update products  set active =1, qtyInStock =0, `qtyInStockJhb`=0, `qtyInStockCpt`=0 where idProduct in (58759466); </stringProp>
+          <stringProp name="queryArguments"></stringProp>
+          <stringProp name="queryArgumentsTypes"></stringProp>
+          <stringProp name="queryTimeout"></stringProp>
+          <stringProp name="queryType">Update Statement</stringProp>
+          <stringProp name="resultSetHandler">Store as String</stringProp>
+          <stringProp name="resultVariable"></stringProp>
+          <stringProp name="variableNames"></stringProp>
+        </JDBCSampler>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="price-loop" elementType="Argument">
+            <stringProp name="Argument.name">price-loop</stringProp>
+            <stringProp name="Argument.value">&quot;true&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="price-index" elementType="Argument">
+            <stringProp name="Argument.name">price-index</stringProp>
+            <stringProp name="Argument.value">0</stringProp>
+            <stringProp name="Argument.desc">[0-2]</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="price_0" elementType="Argument">
+            <stringProp name="Argument.name">price_0</stringProp>
+            <stringProp name="Argument.value">449</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="price_1" elementType="Argument">
+            <stringProp name="Argument.name">price_1</stringProp>
+            <stringProp name="Argument.value">450</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="price_2" elementType="Argument">
+            <stringProp name="Argument.name">price_2</stringProp>
+            <stringProp name="Argument.value">451</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="initialise" elementType="Argument">
+            <stringProp name="Argument.name">initialise</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="collect_string" elementType="Argument">
+            <stringProp name="Argument.name">collect_string</stringProp>
+            <stringProp name="Argument.value"></stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="is_collect" elementType="Argument">
+            <stringProp name="Argument.name">is_collect</stringProp>
+            <stringProp name="Argument.value">true</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="customer-index" elementType="Argument">
+            <stringProp name="Argument.name">customer-index</stringProp>
+            <stringProp name="Argument.value">0</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="customer_0" elementType="Argument">
+            <stringProp name="Argument.name">customer_0</stringProp>
+            <stringProp name="Argument.value">2</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">repeat customer</stringProp>
+          </elementProp>
+          <elementProp name="customer_1" elementType="Argument">
+            <stringProp name="Argument.name">customer_1</stringProp>
+            <stringProp name="Argument.value">16</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">new first time customer</stringProp>
+          </elementProp>
+          <elementProp name="customer-loop" elementType="Argument">
+            <stringProp name="Argument.name">customer-loop</stringProp>
+            <stringProp name="Argument.value">&quot;true&quot;</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="product_0" elementType="Argument">
+            <stringProp name="Argument.name">product_0</stringProp>
+            <stringProp name="Argument.value">59669553</stringProp>
+            <stringProp name="Argument.desc">stock item -jhb</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="product_1" elementType="Argument">
+            <stringProp name="Argument.name">product_1</stringProp>
+            <stringProp name="Argument.value">59669554</stringProp>
+            <stringProp name="Argument.desc">instock_cpt</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="product_2" elementType="Argument">
+            <stringProp name="Argument.name">product_2</stringProp>
+            <stringProp name="Argument.value">58759466</stringProp>
+            <stringProp name="Argument.desc">lead time item</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="product_3" elementType="Argument">
+            <stringProp name="Argument.name">product_3</stringProp>
+            <stringProp name="Argument.value">51941991</stringProp>
+            <stringProp name="Argument.desc">liquor</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="product_4" elementType="Argument">
+            <stringProp name="Argument.name">product_4</stringProp>
+            <stringProp name="Argument.value">59723050</stringProp>
+            <stringProp name="Argument.desc">white goods</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="product_5" elementType="Argument">
+            <stringProp name="Argument.name">product_5</stringProp>
+            <stringProp name="Argument.value">45019030</stringProp>
+            <stringProp name="Argument.desc">digital</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="wmstesting" elementType="Argument">
+            <stringProp name="Argument.name">wmstesting</stringProp>
+            <stringProp name="Argument.value">app-internal-bff.wmstesting.env</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="wmsuat" elementType="Argument">
+            <stringProp name="Argument.name">wmsuat</stringProp>
+            <stringProp name="Argument.value">app-internal-bff.wmsuat.enc</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="environment" elementType="Argument">
+            <stringProp name="Argument.name">environment</stringProp>
+            <stringProp name="Argument.value">http://app-internal-bff.dre.env</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="product_6" elementType="Argument">
+            <stringProp name="Argument.name">product_6</stringProp>
+            <stringProp name="Argument.value"></stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="master" elementType="Argument">
+            <stringProp name="Argument.name">master</stringProp>
+            <stringProp name="Argument.value">app-internal-bff.master.env</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="lanseria" elementType="Argument">
+            <stringProp name="Argument.name">lanseria</stringProp>
+            <stringProp name="Argument.value">5b0d66444002f5001057faf7</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="capetown" elementType="Argument">
+            <stringProp name="Argument.name">capetown</stringProp>
+            <stringProp name="Argument.value">574584c7b30374d0078b4571</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="woodstock" elementType="Argument">
+            <stringProp name="Argument.name">woodstock</stringProp>
+            <stringProp name="Argument.value">5b0d65364002f5001057faf6</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Set up" enabled="true"/>
+        <hashTree>
+          <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Initialise test data" enabled="true">
+            <boolProp name="resetInterpreter">false</boolProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="script">
+if(Integer.parseInt(vars.get(&quot;initialise&quot;)) ==1){
+	vars.put(&quot;initialise&quot;,&quot;2&quot;);  // only init once
+	vars.putObject(&quot;product&quot;,vars.getObject(&quot;product_0&quot;)); // set product type
+
+	// Initialise variables
+
+	//payload collect options
+	vars.putObject(&quot;is_collect1&quot;,true);
+	vars.putObject(&quot;is_personalised&quot;,false);
+	vars.putObject(&quot;is_risky&quot;,true);
+	vars.putObject(&quot;customer_id&quot;,16);
+ 	vars.putObject(&quot;price&quot;,451);
+
+
+ String n=&quot;&quot;;
+if(vars.getObject(&quot;is_personalised&quot;)){
+	n=n+&quot; -( Personalised )-&quot;;
+}
+if(vars.getObject(&quot;is_risky&quot;)){
+	n=n+&quot; -( is_risky )-&quot;;
+}
+
+
+// print product type
+ 	if(vars.get(&quot;product&quot;).equals(&quot;59669553&quot;)){
+ 		//stock item
+ 		vars.put(&quot;product_type&quot;,&quot;Stock item&quot;);   	
+ 	}
+ 	else if(vars.get(&quot;product&quot;).equals(&quot;45019030&quot;)){
+ 		//digital item
+ 		vars.put(&quot;product_type&quot;,&quot;Digital item&quot;); 		
+ 	}
+ 	else if(vars.get(&quot;product&quot;).equals(&quot;58759466&quot;)){
+ 		//digital item
+ 			
+ 		vars.put(&quot;product_type&quot;,&quot;Lead-time item&quot;); 				
+ 	}
+ 	else if(vars.get(&quot;product&quot;).equals(&quot;51941991&quot;)){
+ 		//digital item
+ 		vars.put(&quot;product_type&quot;,&quot;Liquor item&quot;); 				
+ 	}
+ 	else if(vars.get(&quot;product&quot;).equals(&quot;59723050&quot;)){
+ 		//digital item
+ 		vars.put(&quot;product_type&quot;,&quot;WhiteGoods item&quot;); 		
+ 	}
+
+else
+ 	{
+ 		System.out.println(&quot;===Product Unknown ====&quot;);
+ 		}
+ 	System.out.println(&quot;\n\n-------&quot;+vars.get(&quot;product_type&quot;)+&quot;--&quot;+n);
+ }</stringProp>
+          </BeanShellPreProcessor>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Delivery Methods" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+    &quot;products&quot;: [&#xd;
+              {&quot;product_id&quot;: ${product}, &quot;qty&quot;: 1}&#xd;
+         ],&#xd;
+    &quot;products_total&quot;: ${price},&#xd;
+    &quot;customer_id&quot;: ${customer_0}&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${environment}:31993/delivery_methods</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="delivery methods Assertion" enabled="true">
+              <stringProp name="BeanShellAssertion.query">import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import java.util.ArrayList;
+
+
+ArrayList methods = new ArrayList();
+
+	JSONObject jsonObject = (JSONObject)(new JSONParser()).parse(SampleResult.getResponseDataAsString());
+	JSONArray method_list = jsonObject.get(&quot;methods&quot;);	        
+            for(int i=0 ; i&lt; method_list.size(); i++){
+            	JSONObject method = (JSONObject)method_list.get(i);
+            	if(method.get(&quot;is_available&quot;)){
+            		methods.add(&quot;1&quot;);
+            		}else{    methods.add(&quot;0&quot;);}      		
+            }      
+         	vars.putObject(&quot;method&quot;,methods);
+         //	ArrayList m = vars.getObject(&quot;method&quot;);
+          //System.out.println(m);  
+
+
+            </stringProp>
+              <stringProp name="BeanShellAssertion.filename"></stringProp>
+              <stringProp name="BeanShellAssertion.parameters"></stringProp>
+              <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+            </BeanShellAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="==Collect ==" enabled="true"/>
+        <hashTree/>
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="First time" enabled="true">
+          <stringProp name="WhileController.condition">${__BeanShell(${customer-loop})} </stringProp>
+        </WhileController>
+        <hashTree>
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="====${customer_type}====" enabled="true">
+            <stringProp name="BeanShellSampler.query">vars.putObject(&quot;price-loop&quot;,&quot;true&quot;);
+vars.put(&quot;price-index&quot;,&quot;&quot;+0);</stringProp>
+            <stringProp name="BeanShellSampler.filename"></stringProp>
+            <stringProp name="BeanShellSampler.parameters"></stringProp>
+            <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+          </BeanShellSampler>
+          <hashTree>
+            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Customer_ID initialiser" enabled="true">
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="script">//initialise price from price_num  of {449, 450 ,451}
+vars.put(&quot;customer_id&quot;,vars.getObject(&quot;customer_&quot;+Integer.parseInt(vars.get(&quot;customer-index&quot;))));
+	log.info(&quot;\n New Customer :&quot;+vars.get(&quot;customer_id&quot;)+&quot;\n&quot;);
+
+	
+if(Integer.parseInt(vars.get(&quot;customer-index&quot;))==0){
+	vars.put(&quot;customer_type&quot;,&quot;Repeat Customer&quot;);
+	vars.putObject(&quot;customer_id&quot;,2);
+	System.out.println(&quot;==Repeat Customer==&quot;);  
+
+}else if(Integer.parseInt(vars.get(&quot;customer-index&quot;))==1){
+	vars.put(&quot;customer_type&quot;,&quot;First Time Customer&quot;);
+	vars.putObject(&quot;customer_id&quot;,16);
+	System.out.println(&quot;==First Time Customer==&quot;);
+}</stringProp>
+            </BeanShellPreProcessor>
+            <hashTree/>
+          </hashTree>
+          <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Price-control" enabled="true">
+            <stringProp name="WhileController.condition">${__BeanShell(${price-loop})} </stringProp>
+          </WhileController>
+          <hashTree>
+            <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${collect_string}  ${product_type}  @ R${price}" enabled="true">
+              <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+              <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                <collectionProp name="Arguments.arguments">
+                  <elementProp name="" elementType="HTTPArgument">
+                    <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                    <stringProp name="Argument.value">{&#xd;
+    &quot;products&quot;: [&#xd;
+         {&quot;product_id&quot;: ${product}, &quot;qty&quot;: 1}&#xd;
+    ],&#xd;
+    &quot;products_total&quot;: ${price},&#xd;
+    &quot;sales_region&quot;: &quot;CPT&quot;,&#xd;
+    &quot;payment_method&quot;: &quot;COD&quot;,&#xd;
+    &quot;is_personalised&quot;: true,&#xd;
+    &quot;is_risky&quot;: false,&#xd;
+    &quot;customer_id&quot;: ${customer_id},&#xd;
+    &quot;address_id&quot;: &quot;574584c7b30374d0078b4571&quot;,&#xd;
+    &quot;is_collect&quot;: ${is_collect1},&#xd;
+    &quot;branch_code&quot;: &quot;GAR&quot;&#xd;
+}</stringProp>
+                    <stringProp name="Argument.metadata">=</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </elementProp>
+              <stringProp name="HTTPSampler.domain"></stringProp>
+              <stringProp name="HTTPSampler.port"></stringProp>
+              <stringProp name="HTTPSampler.protocol"></stringProp>
+              <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+              <stringProp name="HTTPSampler.path">${environment}:31993/products</stringProp>
+              <stringProp name="HTTPSampler.method">POST</stringProp>
+              <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+              <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+              <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+              <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+              <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+              <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            </HTTPSamplerProxy>
+            <hashTree>
+              <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                <collectionProp name="HeaderManager.headers">
+                  <elementProp name="" elementType="Header">
+                    <stringProp name="Header.name">Content-Type</stringProp>
+                    <stringProp name="Header.value">application/json</stringProp>
+                  </elementProp>
+                </collectionProp>
+              </HeaderManager>
+              <hashTree/>
+              <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Total_Price Initialiser" enabled="true">
+                <boolProp name="resetInterpreter">false</boolProp>
+                <stringProp name="parameters"></stringProp>
+                <stringProp name="filename"></stringProp>
+                <stringProp name="script">//initialise price from price_num  of {449, 450 ,451}
+vars.putObject(&quot;price&quot;,vars.getObject(&quot;price_&quot;+vars.get(&quot;price-index&quot;)));
+//log.info(&quot;\n our new price is :&quot;+${price});
+
+	//log.info(&quot;\n\n 0 &quot;+ vars.get(&quot;is_collect&quot;));
+	//log.info(&quot;\n\n 1&quot;+ vars.getObject(&quot;is_collect1&quot;));
+	
+if(vars.getObject(&quot;is_collect1&quot;)){
+	vars.put(&quot;collect_string&quot;,&quot;Collectable -&quot;);
+	//log.info(&quot;\n\n is collactable&quot;);
+
+
+}else if(!vars.getObject(&quot;is_collect1&quot;)){
+	vars.put(&quot;collect_string&quot;,&quot;Delivery -&quot;);
+	//log.info(&quot;\n\n not collactable&quot;);
+}</stringProp>
+              </BeanShellPreProcessor>
+              <hashTree/>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Reset Price Control" enabled="true">
+                <stringProp name="BeanShellAssertion.query">int temp =Integer.parseInt(vars.get(&quot;price-index&quot;));
+if(temp &lt;= 2){
+temp=temp+1;
+	vars.put(&quot;price-index&quot;,&quot;&quot;+temp);
+}
+if(temp==3){
+	vars.putObject(&quot;price-loop&quot;,&quot;false&quot;);
+	}
+	
+String m =&quot; \n reset price index :&quot;+temp +&quot;\n&quot;;
+	//System.out.println(m);
+	log.info(m);</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+              <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Test Cases" enabled="true">
+                <stringProp name="BeanShellAssertion.query">import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+String m =&quot;&quot;;
+
+//vars.put(&quot;price1&quot;,vars.getObject(&quot;price_&quot;+vars.get(&quot;price-index&quot;)));
+//vars.putObject(&quot;price&quot;,Integer.parseInt(vars.get(&quot;price1&quot;)));
+
+    	ArrayList delivery_method = vars.getObject(&quot;method&quot;);  // [ collect , courier, digital ]  
+
+public static void assertEquals(JSONObject jo){
+	// Collect only
+	if(${is_collect1}){
+		if(jo.get(&quot;name&quot;).equals(&quot;Collect - CPT&quot;)  &amp;&amp; jo.get(&quot;cost&quot;)== 0){
+				System.out.println(&quot;PASS - &quot;+jo.get(&quot;name&quot;)+&quot; R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+			}
+		else if(!(delivery_method.get(0)==1)){
+			//System.out.println(&quot;FAIL --Not collectable !---&quot;+jo.get(&quot;name&quot;));
+			System.out.println(&quot;FAIL - NOT Collectable !! &quot;+jo.get(&quot;name&quot;)+&quot; R&quot;+jo.get(&quot;cost&quot;));
+			}
+
+// Delivery only
+	}
+	/*
+	if(!${is_collect1})
+				
+		if(jo.get(&quot;code&quot;).equals(&quot;WE&quot;)){
+			if(jo.get(&quot;cost&quot;)== 100)
+				{m=&quot;\n\n PASS&quot;+jo.get(&quot;code&quot;)+&quot;\t&quot;+jo.get(&quot;cost&quot;)+&quot;  === 100&quot;;log.info(m);System.out.println(m);}
+				else{
+					System.out.println(&quot;FAIL - WE cost:&quot;+jo.get(&quot;cost&quot;)+&quot; incorrect!&quot;);}
+		}
+		else if(jo.get(&quot;code&quot;).equals(&quot;EX&quot;)){
+			if(jo.get(&quot;cost&quot;)== 95)
+				{ m=&quot;\n\n PASS&quot;+jo.get(&quot;code&quot;)+&quot;\t&quot;+jo.get(&quot;cost&quot;)+&quot;  === 95&quot;;log.info(m);System.out.println(m);}
+				else{
+					System.out.println(&quot;FAIL - EX cost:&quot;+jo.get(&quot;cost&quot;)+&quot; incorrect!&quot;);}
+		}
+		else if(jo.get(&quot;code&quot;).equals(&quot;SD&quot;)){
+			if(jo.get(&quot;cost&quot;)== 120)
+				{m=&quot;\n\n PASS&quot;+jo.get(&quot;code&quot;)+&quot;\t&quot;+jo.get(&quot;cost&quot;)+&quot;  === 120&quot;;log.info(m);System.out.println(m);}
+				else{
+					System.out.println(&quot;FAIL - SD cost:&quot;+jo.get(&quot;cost&quot;)+&quot; incorrect!&quot;);}
+		}
+		else if(jo.get(&quot;code&quot;).equals(&quot;ST&quot;)){
+			
+			if(jo.get(&quot;cost&quot;)== 60)
+				{
+					//m=&quot;\n\n&quot;+jo.get(&quot;code&quot;)+&quot;  == Standard \n&quot;+jo.get(&quot;cost&quot;)+&quot;  === 60&quot;;log.info(m);System.out.println(m);
+				// cost should only be 60 if.
+				if(vars.getObject(&quot;price&quot;) &lt; 450){
+					//true &lt; threshold
+					System.out.println(&quot;PASS - standard price  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+					}
+				else if(${product}==59723050){
+					//true for white goods
+					System.out.println(&quot;PASS - standard price white goods&quot;);	}
+				
+				else {
+					// bug
+					Failure=true;
+     				FailureMessage = &quot;FAIL - Incorrectly cost for &quot;+vars.get(&quot;product_type&quot;);
+					System.out.println(&quot;FAIL - Incorrectly cost for&quot;);}
+				
+				}
+			else if(jo.get(&quot;cost&quot;)== 0  &amp;&amp; vars.getObject(&quot;price&quot;) &lt; 450){
+					if(${customer_id} ==16){
+							System.out.println(&quot;PASS - First time free  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+					}else {
+							System.out.println(&quot;FAIL  -  Repeat not free / fallback  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+						}
+					
+					}
+			else if(jo.get(&quot;cost&quot;)== 0  &amp;&amp; vars.getObject(&quot;price&quot;) &gt;= 450){
+					if(${customer_id} ==16){
+							System.out.println(&quot;PASS - First time free R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+					}else {
+							System.out.println(&quot;PASS  - Over threshhold price / fallback  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+						}
+					
+					}
+				
+		}
+		
+		else {
+		Failure=true;
+     	FailureMessage = &quot;\n\n&quot;+jo.get(&quot;name&quot;)+&quot; for &quot;+jo.get(&quot;code&quot;)+&quot; ---&gt; incorrect&quot;;System.out.println(FailureMessage);}
+		*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//String str_response = ;
+	//JSONParser parser = new JSONParser();
+	JSONObject jsonObject = (JSONObject)(new JSONParser()).parse(SampleResult.getResponseDataAsString());
+	JSONArray jsonArray = jsonObject.get(&quot;resources&quot;);
+		if(jsonArray.size()&gt;1)
+			{
+				m =&quot;\n\n Delivery shipping plans = &quot;+jsonArray.size(); System.out.println(m); }  
+			
+		else if(jsonArray.size()==1)
+			{
+				if(delivery_method.get(2)==1){
+				System.out.println(&quot;--Digital delivery is available ---&quot;);
+				// test digital items delivery charge
+				}
+				else if(delivery_method.get(0)==1){
+				System.out.println(&quot;--Collect is available ---&quot;);
+				// test digital items delivery charge
+				
+				
+				}
+				else if(delivery_method.get(1)==1){
+				System.out.println(&quot;--Delivery is available ---&quot;);
+				// test digital items delivery charge
+				}
+				
+			}
+		else{m=&quot;\n\n Not enough Shipping options --&gt; &quot;+jsonArray.size();System.out.println(m);
+			Failure=true;
+     		FailureMessage = &quot;\n\n Not enough Shipping options\n&quot;;System.out.println(FailureMessage);
+		} 
+			
+
+		for(int i=0 ; i&lt; jsonArray.size(); i++){
+			assertEquals(jsonArray.get(i));
+			}
+			</stringProp>
+                <stringProp name="BeanShellAssertion.filename"></stringProp>
+                <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+              </BeanShellAssertion>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Reset Customer_id Control" enabled="false">
+            <stringProp name="BeanShellAssertion.query">int temp =Integer.parseInt(vars.get(&quot;customer-index&quot;));
+	log.info(&quot;\n---------&quot;+temp);
+if(temp &lt;= 1){
+temp=temp+1;
+	vars.put(&quot;customer-index&quot;,&quot;&quot;+temp);
+	log.info(&quot;\n-updated to :&quot;+temp);
+}
+else if(temp==2){
+	vars.putObject(&quot;customer-loop&quot;,&quot;false&quot;);
+	}
+	
+String m =&quot;\n customer index == &quot;+temp +&quot;\n&quot;;
+
+	//log.info(m);</stringProp>
+            <stringProp name="BeanShellAssertion.filename"></stringProp>
+            <stringProp name="BeanShellAssertion.parameters"></stringProp>
+            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+          </BeanShellAssertion>
+          <hashTree/>
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="==================" enabled="true">
+            <stringProp name="BeanShellSampler.query">int temp =Integer.parseInt(vars.get(&quot;customer-index&quot;));
+if(temp &lt;=1){
+temp=temp+1;
+	vars.put(&quot;customer-index&quot;,&quot;&quot;+temp);
+}
+if(temp==2){
+	vars.putObject(&quot;customer-loop&quot;,&quot;false&quot;);
+	vars.putObject(&quot;is_collect1&quot;,false);
+
+	}
+	
+String m =&quot;\n reset customer index &quot;+temp +&quot;\n&quot;;
+	//System.out.println(m);
+	log.info(m);</stringProp>
+            <stringProp name="BeanShellSampler.filename"></stringProp>
+            <stringProp name="BeanShellSampler.parameters"></stringProp>
+            <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+          </BeanShellSampler>
+          <hashTree/>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="==Delivery ==" enabled="true"/>
+        <hashTree>
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="-Delivery-" enabled="true">
+            <stringProp name="BeanShellSampler.query">	vars.putObject(&quot;customer-loop&quot;,&quot;true&quot;);
+	vars.putObject(&quot;is_collect1&quot;,false);
+	vars.put(&quot;customer-index&quot;,&quot;&quot;+0);</stringProp>
+            <stringProp name="BeanShellSampler.filename"></stringProp>
+            <stringProp name="BeanShellSampler.parameters"></stringProp>
+            <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+          </BeanShellSampler>
+          <hashTree/>
+        </hashTree>
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Repeat" enabled="true">
+          <stringProp name="WhileController.condition">${__BeanShell(${customer-loop})} </stringProp>
+        </WhileController>
+        <hashTree>
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="====${customer_type}====" enabled="true">
+            <stringProp name="BeanShellSampler.query">vars.putObject(&quot;price-loop&quot;,&quot;true&quot;);
+vars.put(&quot;price-index&quot;,&quot;&quot;+0);
+
+//
+vars.putObject(&quot;customer-loop&quot;,&quot;true&quot;);
+</stringProp>
+            <stringProp name="BeanShellSampler.filename"></stringProp>
+            <stringProp name="BeanShellSampler.parameters"></stringProp>
+            <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+          </BeanShellSampler>
+          <hashTree>
+            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Customer_ID initialiser" enabled="true">
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="script">//initialise price from price_num  of {449, 450 ,451}
+vars.put(&quot;customer_id&quot;,vars.getObject(&quot;customer_&quot;+Integer.parseInt(vars.get(&quot;customer-index&quot;))));
+	log.info(&quot;\n New Customer :&quot;+vars.get(&quot;customer_id&quot;)+&quot;\n&quot;);
+
+	
+if(Integer.parseInt(vars.get(&quot;customer-index&quot;))==0){
+	vars.put(&quot;customer_type&quot;,&quot;Repeat Customer&quot;);
+	vars.putObject(&quot;customer_id&quot;,2);
+	System.out.println(&quot;==Repeat Customer==&quot;);  
+
+}else if(Integer.parseInt(vars.get(&quot;customer-index&quot;))==1){
+	vars.put(&quot;customer_type&quot;,&quot;First Time Customer&quot;);
+	vars.putObject(&quot;customer_id&quot;,16);
+	System.out.println(&quot;==First Time Customer==&quot;);
+}</stringProp>
+            </BeanShellPreProcessor>
+            <hashTree/>
+          </hashTree>
+          <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Price-control" enabled="true">
+            <stringProp name="WhileController.condition">${__BeanShell(${price-loop})} </stringProp>
+          </WhileController>
+          <hashTree>
+            <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Goods" enabled="true"/>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${collect_string}  ${product_type}  @ R${price}" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{&#xd;
+    &quot;products&quot;: [&#xd;
+        {&quot;product_id&quot;: ${product}, &quot;qty&quot;: 1},&#xd;
+        {&quot;product_id&quot;: ${product_0}, &quot;qty&quot;: 1}&#xd;
+&#xd;
+&#xd;
+    ],&#xd;
+    &quot;products_total&quot;: ${price},&#xd;
+    &quot;sales_region&quot;: &quot;CPT&quot;,&#xd;
+    &quot;payment_method&quot;: &quot;COD&quot;,&#xd;
+    &quot;is_personalised&quot;: ${is_personalised},&#xd;
+    &quot;is_risky&quot;: ${is_risky},&#xd;
+    &quot;customer_id&quot;:  ${customer_id},&#xd;
+    &quot;address_id&quot;: &quot;574584c7b30374d0078b4571&quot;,&#xd;
+    &quot;is_collect&quot;: ${is_collect1},&#xd;
+    &quot;branch_code&quot;: &quot;GAR&quot;&#xd;
+}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.domain"></stringProp>
+                <stringProp name="HTTPSampler.port"></stringProp>
+                <stringProp name="HTTPSampler.protocol"></stringProp>
+                <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+                <stringProp name="HTTPSampler.path">${environment}:31993/products</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+                <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+                <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+                <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+                <stringProp name="HTTPSampler.response_timeout"></stringProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+                  <collectionProp name="HeaderManager.headers">
+                    <elementProp name="" elementType="Header">
+                      <stringProp name="Header.name">Content-Type</stringProp>
+                      <stringProp name="Header.value">application/json</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </HeaderManager>
+                <hashTree/>
+                <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Total_Price Initialiser" enabled="true">
+                  <boolProp name="resetInterpreter">false</boolProp>
+                  <stringProp name="parameters"></stringProp>
+                  <stringProp name="filename"></stringProp>
+                  <stringProp name="script">//initialise price conversion
+vars.put(&quot;price1&quot;,vars.getObject(&quot;price_&quot;+vars.get(&quot;price-index&quot;)));
+vars.putObject(&quot;price&quot;,Integer.parseInt(vars.get(&quot;price1&quot;)));
+
+	
+if(vars.getObject(&quot;is_collect1&quot;)){
+	vars.put(&quot;collect_string&quot;,&quot;Collectable -&quot;);
+	//log.info(&quot;\n\n is collactable&quot;);
+
+
+}else if(!vars.getObject(&quot;is_collect1&quot;)){
+	vars.put(&quot;collect_string&quot;,&quot;Delivery -&quot;);
+	//log.info(&quot;\n\n not collactable&quot;);
+}
+
+//System.out.println(${collect_string}+&quot; WG @ R&quot;+${price});</stringProp>
+                </BeanShellPreProcessor>
+                <hashTree/>
+                <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Reset Price Control" enabled="true">
+                  <stringProp name="BeanShellAssertion.query">int temp =Integer.parseInt(vars.get(&quot;price-index&quot;));
+if(temp &lt;= 2){
+temp=temp+1;
+	vars.put(&quot;price-index&quot;,&quot;&quot;+temp);
+}
+if(temp==3){
+	vars.putObject(&quot;price-loop&quot;,&quot;false&quot;);
+	}
+	
+//String m =&quot; \n reset price index&quot;+temp +&quot;\n&quot;;
+	//System.out.println(m);
+	//log.info(m);</stringProp>
+                  <stringProp name="BeanShellAssertion.filename"></stringProp>
+                  <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                  <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+                </BeanShellAssertion>
+                <hashTree/>
+                <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Response Body" enabled="false">
+                  <stringProp name="BeanShellAssertion.query">import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+String m =&quot;&quot;;
+
+    	ArrayList delivery_method = vars.getObject(&quot;method&quot;);  // [ collect , courier, digital ]  
+
+public static void assertEquals(JSONObject jo){
+	if(${is_collect1}){
+		if(delivery_method.get(0)==1){
+			//System.out.println(&quot;--Collection is available ---&quot;);
+			}else{
+				//System.out.println(&quot;--Not collectable !---&quot;); 
+				FailureMessage =&quot;--Not collectable !---&quot;;
+				}
+		if(jo.get(&quot;name&quot;).equals(&quot;Collect - CPT&quot;)  &amp;&amp; jo.get(&quot;cost&quot;)== 0){
+				{Failure=false; m=&quot;\n\n&quot;+jo.get(&quot;name&quot;)+&quot;  == Collect - CPT \n&quot;+jo.get(&quot;cost&quot;)+&quot;  ======== 0&quot;;log.info(m);
+				//System.out.println(m);
+				}
+		}else {
+		Failure=true;
+     	FailureMessage = &quot;\n\n&quot;+jo.get(&quot;name&quot;)+&quot;  != Collect - CPT \n&quot;+jo.get(&quot;cost&quot;)+&quot;  != 0&quot;;
+     	log.info(FailureMessage);
+     	System.out.println(FailureMessage);}
+
+// Delivery only
+	}if(!${is_collect1})
+				
+		if(jo.get(&quot;code&quot;).equals(&quot;WE&quot;)){
+			if(jo.get(&quot;cost&quot;)== 100)
+				{m=&quot;\n\n&quot;+jo.get(&quot;code&quot;)+&quot;  == &quot;+jo.get(&quot;name&quot;)+&quot;\n&quot;+jo.get(&quot;cost&quot;)+&quot;  === 100&quot;;log.info(m);System.out.println(m);}
+		}
+		else if(jo.get(&quot;code&quot;).equals(&quot;EX&quot;)){
+			if(jo.get(&quot;cost&quot;)== 95)
+				{ m=&quot;\n\n&quot;+jo.get(&quot;code&quot;)+&quot;  == Guaranteed Express \n&quot;+jo.get(&quot;cost&quot;)+&quot;  === 95&quot;;log.info(m);System.out.println(m);}
+		}
+		else if(jo.get(&quot;code&quot;).equals(&quot;SD&quot;)){
+			if(jo.get(&quot;cost&quot;)== 120)
+				{m=&quot;\n\n&quot;+jo.get(&quot;code&quot;)+&quot;  == Guaranteed Same Day \n&quot;+jo.get(&quot;cost&quot;)+&quot;  === 120&quot;;log.info(m);System.out.println(m);}
+		}
+		else if(jo.get(&quot;code&quot;).equals(&quot;ST&quot;)){
+			if(jo.get(&quot;cost&quot;)== 60)
+				{m=&quot;\n\n&quot;+jo.get(&quot;code&quot;)+&quot;  == Standard \n&quot;+jo.get(&quot;cost&quot;)+&quot;  === 60&quot;;log.info(m);}//System.out.println(m);}
+		}
+		
+		else {
+		Failure=true;
+     	FailureMessage = &quot;\n\n&quot;+jo.get(&quot;name&quot;)+&quot; for &quot;+jo.get(&quot;code&quot;)+&quot; ---&gt; incorrect&quot;;System.out.println(FailureMessage);}
+		
+}
+
+
+
+
+
+
+
+
+	//String str_response = ;
+	//JSONParser parser = new JSONParser();
+	JSONObject jsonObject = (JSONObject)(new JSONParser()).parse(SampleResult.getResponseDataAsString());
+	JSONArray jsonArray = jsonObject.get(&quot;resources&quot;);
+		if(jsonArray.size()&lt;5)
+			{m =&quot;\n\n Delivery shipping plans = &quot;+jsonArray.size(); //System.out.println(m); 
+			}  
+		else if(jsonArray.size()==1)
+			{
+				if(delivery_method.get(2)==1){
+			//System.out.println(&quot;--Digital delivery is available ---&quot;);
+			}else{System.out.println(&quot;&quot;);
+				}
+				
+				m=&quot;\n\n Shipping options for collection is = &quot;+jsonArray.size() +&quot; and its enough&quot;; System.out.println(m); } 
+		else{m=&quot;\n\n Not enough Shipping options --&gt; &quot;+jsonArray.size();System.out.println(m);
+			Failure=true;
+     		FailureMessage = &quot;\n\n Not enough Shipping options\n&quot;;System.out.println(FailureMessage);
+		} 
+			
+
+		for(int i=0 ; i&lt; jsonArray.size(); i++){
+			assertEquals(jsonArray.get(i));
+			}
+			</stringProp>
+                  <stringProp name="BeanShellAssertion.filename"></stringProp>
+                  <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                  <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+                </BeanShellAssertion>
+                <hashTree/>
+                <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Test Cases" enabled="true">
+                  <stringProp name="BeanShellAssertion.query">import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+String m =&quot;&quot;;
+
+//vars.put(&quot;price1&quot;,vars.getObject(&quot;price_&quot;+vars.get(&quot;price-index&quot;)));
+//vars.putObject(&quot;price&quot;,Integer.parseInt(vars.get(&quot;price1&quot;)));
+
+    	ArrayList delivery_method = vars.getObject(&quot;method&quot;);  // [ collect , courier, digital ]  
+
+public static void assertEquals(JSONObject jo){
+	// Collect only
+	if(${is_collect1}){
+		if(!delivery_method.get(0)==1){
+			System.out.println(&quot;FAIL--Not collectable !---&quot;); Failure=true; FailureMessage =&quot;--Not collectable !---&quot;;
+			}
+		if(jo.get(&quot;name&quot;).equals(&quot;Collect - CPT&quot;)  &amp;&amp; jo.get(&quot;cost&quot;)== 0){
+			Failure=false; m=&quot;\n\n PASS &quot;+jo.get(&quot;name&quot;)+&quot;\t&quot;+jo.get(&quot;cost&quot;)+&quot;  ======== 0&quot;;
+			log.info(m);System.out.println(m);
+			}
+		else { 
+			Failure=true;
+	     	FailureMessage = &quot;\n\n FAIL &quot;+jo.get(&quot;name&quot;)+&quot;  != Collect - CPT&quot;+jo.get(&quot;cost&quot;)+&quot;  != 0&quot;;
+	     	log.info(FailureMessage);
+	     	System.out.println(FailureMessage);}
+
+// Delivery only
+	}if(!${is_collect1})
+				
+		if(jo.get(&quot;code&quot;).equals(&quot;WE&quot;)){
+			if(jo.get(&quot;cost&quot;)== 100)
+				{// weekend R100
+
+				if(jo.get(&quot;name&quot;).equals(&quot;Guaranteed Weekend - Saturday&quot;)){
+				System.out.println(&quot;PASS - Weekend SAT  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));	}
+				
+				else if(jo.get(&quot;name&quot;).equals(&quot;Guaranteed Weekend - Sunday&quot;)){
+				System.out.println(&quot;PASS - Weekend SUN  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));	}
+		
+				}
+				else{
+					System.out.println(&quot;FAIL - WE cost:&quot;+jo.get(&quot;cost&quot;)+&quot; incorrect!&quot;);}
+		}
+		else if(jo.get(&quot;code&quot;).equals(&quot;EX&quot;)){
+			if(jo.get(&quot;cost&quot;)== 95)
+				{System.out.println(&quot;PASS - Next day  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));	}
+				else{
+					System.out.println(&quot;FAIL - EX cost:&quot;+jo.get(&quot;cost&quot;)+&quot; incorrect!&quot;);}
+		}
+		
+		else if(jo.get(&quot;code&quot;).equals(&quot;SD&quot;)){
+			if(jo.get(&quot;cost&quot;)== 120)
+				{System.out.println(&quot;PASS - Same day  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));	}
+				else{
+					System.out.println(&quot;FAIL - SD cost:&quot;+jo.get(&quot;cost&quot;)+&quot; incorrect!&quot;);}
+		}
+		else if(jo.get(&quot;code&quot;).equals(&quot;ST&quot;)){
+			
+			if(jo.get(&quot;cost&quot;)== 60)
+				{
+					//m=&quot;\n\n&quot;+jo.get(&quot;code&quot;)+&quot;  == Standard \n&quot;+jo.get(&quot;cost&quot;)+&quot;  === 60&quot;;log.info(m);System.out.println(m);
+				// cost should only be 60 if.
+				if(vars.getObject(&quot;price&quot;) &lt; 450){
+					//true &lt; threshold
+					System.out.println(&quot;PASS - Standard R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+					}
+				else if(${product}==59723050){
+					//true for white goods
+					System.out.println(&quot;PASS - Standard White-Goods   R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+				}
+			else {
+					// bug
+					Failure=true;
+     				FailureMessage = &quot;FAIL - Incorrect cost for &quot;+vars.get(&quot;product_type&quot;);
+					System.out.println(&quot;FAIL - Incorrect cost for&quot;+vars.get(&quot;product_type&quot;)); }
+				
+				}
+			else if(jo.get(&quot;cost&quot;)== 0  &amp;&amp; vars.getObject(&quot;price&quot;) &lt; 450){
+					if(vars.get(&quot;customer_id&quot;).equals(&quot;16&quot;)){
+							System.out.println(&quot;PASS - Standard First-time free R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+					}else {
+							System.out.println(&quot;FAIL - Repeat not free / fallback  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+						}
+					
+					}
+			else if(jo.get(&quot;cost&quot;)== 0  &amp;&amp; vars.getObject(&quot;price&quot;) &gt;= 450){
+					if(vars.get(&quot;customer_id&quot;).equals(&quot;16&quot;)){
+							System.out.println(&quot;PASS - Standard First-time free R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+					}else {
+							System.out.println(&quot;PASS - Standard Over Threshold  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+						}
+					
+					}
+				
+		}
+		
+		else {
+		Failure=true;
+     	FailureMessage = &quot;\n&quot;+jo.get(&quot;name&quot;)+&quot; for &quot;+jo.get(&quot;code&quot;)+&quot; ---&gt; incorrect&quot;;System.out.println(FailureMessage);}
+		
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//String str_response = ;
+	//JSONParser parser = new JSONParser();
+	JSONObject jsonObject = (JSONObject)(new JSONParser()).parse(SampleResult.getResponseDataAsString());
+	JSONArray jsonArray = jsonObject.get(&quot;resources&quot;);
+		if(jsonArray.size()&gt;1)
+			{
+				//m =&quot;\n\n Delivery shipping plans = &quot;+jsonArray.size(); System.out.println(m); 
+				}  
+			
+		else if(jsonArray.size()==1)
+			{
+				if(delivery_method.get(2)==1){
+				System.out.println(&quot;--Digital delivery is available ---&quot;);
+				// test digital items delivery charge
+				}
+				else if(delivery_method.get(0)==1){
+				System.out.println(&quot;--Collect is available ---&quot;);
+				// test digital items delivery charge
+				
+				
+				}
+				else if(delivery_method.get(1)==1){
+				System.out.println(&quot;--Delivery is available ---&quot;);
+				// test digital items delivery charge
+				}
+				
+			}
+		else{m=&quot;\n\n Not enough Shipping options --&gt; &quot;+jsonArray.size();System.out.println(m);
+			Failure=true;
+     		FailureMessage = &quot;\n\n Not enough Shipping options\n&quot;;System.out.println(FailureMessage);
+		} 
+			
+
+		for(int i=0 ; i&lt; jsonArray.size(); i++){
+			assertEquals(jsonArray.get(i));
+			}
+			</stringProp>
+                  <stringProp name="BeanShellAssertion.filename"></stringProp>
+                  <stringProp name="BeanShellAssertion.parameters"></stringProp>
+                  <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+                </BeanShellAssertion>
+                <hashTree/>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+          <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Reset Customer_id Control" enabled="false">
+            <stringProp name="BeanShellAssertion.query">int temp =Integer.parseInt(vars.get(&quot;customer-index&quot;));
+if(temp == 0){
+temp=temp+1;
+	vars.put(&quot;customer-index&quot;,&quot;&quot;+temp);
+}
+if(temp==2){
+	vars.putObject(&quot;customer-loop&quot;,&quot;false&quot;);
+	}
+	
+String m =&quot;\n reset customer index &quot;+temp +&quot;\n&quot;;
+	//System.out.println(m);
+	log.info(m);</stringProp>
+            <stringProp name="BeanShellAssertion.filename"></stringProp>
+            <stringProp name="BeanShellAssertion.parameters"></stringProp>
+            <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+          </BeanShellAssertion>
+          <hashTree/>
+          <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="==================" enabled="true">
+            <stringProp name="BeanShellSampler.query">int temp =Integer.parseInt(vars.get(&quot;customer-index&quot;));
+if(temp &lt;= 1){
+temp=temp+1;
+	vars.put(&quot;customer-index&quot;,&quot;&quot;+temp);
+}
+if(temp==2){
+	vars.putObject(&quot;customer-loop&quot;,&quot;false&quot;);
+	}
+	
+String m =&quot;\n reset customer index -&quot;+temp +&quot;\n&quot;;
+	//System.out.println(m);
+	log.info(m);</stringProp>
+            <stringProp name="BeanShellSampler.filename"></stringProp>
+            <stringProp name="BeanShellSampler.parameters"></stringProp>
+            <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+          </BeanShellSampler>
+          <hashTree/>
+        </hashTree>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="IBT order delivery times" enabled="false"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="master" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+    &quot;products&quot;: [&#xd;
+        {&quot;product_id&quot;: ${product_0}, &quot;qty&quot;: 1}&#xd;
+        ,&#xd;
+        {&quot;product_id&quot;: ${product_1}, &quot;qty&quot;: 1}&#xd;
+&#xd;
+&#xd;
+    ],&#xd;
+    &quot;products_total&quot;: ${price},&#xd;
+    &quot;sales_region&quot;: &quot;CPT&quot;,&#xd;
+    &quot;payment_method&quot;: &quot;COD&quot;,&#xd;
+    &quot;is_personalised&quot;: ${is_personalised},&#xd;
+    &quot;is_risky&quot;: ${is_risky},&#xd;
+    &quot;customer_id&quot;:  ${customer_id},&#xd;
+    &quot;address_id&quot;: &quot;574584c7b30374d0078b4571&quot;,&#xd;
+    &quot;is_collect&quot;: ${is_collect1},&#xd;
+    &quot;branch_code&quot;: &quot;GAR&quot;&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${master}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">products</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Total_Price Initialiser" enabled="true">
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="script">//initialise price conversion
+vars.put(&quot;price1&quot;,vars.getObject(&quot;price_&quot;+vars.get(&quot;price-index&quot;)));
+vars.putObject(&quot;price&quot;,Integer.parseInt(vars.get(&quot;price1&quot;)));
+
+	
+if(vars.getObject(&quot;is_collect1&quot;)){
+	vars.put(&quot;collect_string&quot;,&quot;Collectable -&quot;);
+	//log.info(&quot;\n\n is collactable&quot;);
+
+
+}else if(!vars.getObject(&quot;is_collect1&quot;)){
+	vars.put(&quot;collect_string&quot;,&quot;Delivery -&quot;);
+	//log.info(&quot;\n\n not collactable&quot;);
+}
+
+//System.out.println(${collect_string}+&quot; WG @ R&quot;+${price});</stringProp>
+            </BeanShellPreProcessor>
+            <hashTree/>
+            <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Reset Price Control" enabled="true">
+              <stringProp name="BeanShellAssertion.query">int temp =Integer.parseInt(vars.get(&quot;price-index&quot;));
+if(temp &lt;= 2){
+temp=temp+1;
+	vars.put(&quot;price-index&quot;,&quot;&quot;+temp);
+}
+if(temp==3){
+	vars.putObject(&quot;price-loop&quot;,&quot;false&quot;);
+	}
+	
+//String m =&quot; \n reset price index&quot;+temp +&quot;\n&quot;;
+	//System.out.println(m);
+	//log.info(m);</stringProp>
+              <stringProp name="BeanShellAssertion.filename"></stringProp>
+              <stringProp name="BeanShellAssertion.parameters"></stringProp>
+              <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+            </BeanShellAssertion>
+            <hashTree/>
+            <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="store-promisedates-test-data" enabled="true">
+              <stringProp name="BeanShellAssertion.query">import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+	String str_date =&quot;&quot;;
+
+public void store_promisedates(JSONObject jo){
+	// if collect
+	if(${is_collect1}){
+		str_date= jo.get(&quot;not_after&quot;);
+		vars.put(&quot;promisedate_collect&quot;,str_date);
+		log.info(&quot;\n\npromisedate_collect: &quot;+str_date+&quot;\n\n&quot;);
+	}else{
+
+
+
+
+		//log.info(&quot;\n\n else promisedate_collect: &quot;+str_date+&quot;\n\n&quot;);
+
+
+
+		
+	}
+
+
+
+	
+	
+}
+
+	//JSONParser parser = new JSONParser();
+	JSONObject jsonObject = (JSONObject)(new JSONParser()).parse(SampleResult.getResponseDataAsString());
+	JSONArray jsonArray = jsonObject.get(&quot;resources&quot;);
+
+	if(${is_collect1}){
+		store_promisedates(jsonArray.get(0));
+		//log.info(&quot;\n\njsonArray.get(0) : &quot;+jsonArray.get(0)+&quot;\n\n&quot;);
+		}
+		else{
+			for(int i=0 ; i&lt; jsonArray.size(); i++){
+			store_promisedates(jsonArray.get(i));
+			}
+		}
+	
+
+		//JSONObject jsonObject = (JSONObject)jsonArray.get(1);
+	//	String s= jsonObject.get(&quot;not_after&quot;);
+		//vars.put(&quot;promisedate&quot;,s);
+		//log.info(&quot;\n\nPromise date: &quot;+str_date+&quot;\n\n&quot;);
+		
+	
+			
+</stringProp>
+              <stringProp name="BeanShellAssertion.filename"></stringProp>
+              <stringProp name="BeanShellAssertion.parameters"></stringProp>
+              <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+            </BeanShellAssertion>
+            <hashTree/>
+            <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Test Cases" enabled="false">
+              <stringProp name="BeanShellAssertion.query">import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+String m =&quot;&quot;;
+
+//vars.put(&quot;price1&quot;,vars.getObject(&quot;price_&quot;+vars.get(&quot;price-index&quot;)));
+//vars.putObject(&quot;price&quot;,Integer.parseInt(vars.get(&quot;price1&quot;)));
+
+    	ArrayList delivery_method = vars.getObject(&quot;method&quot;);  // [ collect , courier, digital ]  
+
+public static void assertEquals(JSONObject jo){
+	// Collect only
+	if(${is_collect1}){
+		if(!delivery_method.get(0)==1){
+			System.out.println(&quot;FAIL--Not collectable !---&quot;); Failure=true; FailureMessage =&quot;--Not collectable !---&quot;;
+			}
+		if(jo.get(&quot;name&quot;).equals(&quot;Collect - CPT&quot;)  &amp;&amp; jo.get(&quot;cost&quot;)== 0){
+			Failure=false; m=&quot;\n\n PASS &quot;+jo.get(&quot;name&quot;)+&quot;\t&quot;+jo.get(&quot;cost&quot;)+&quot;  ======== 0&quot;;
+			log.info(m);System.out.println(m);
+			}
+		else { 
+			Failure=true;
+	     	FailureMessage = &quot;\n\n FAIL &quot;+jo.get(&quot;name&quot;)+&quot;  != Collect - CPT&quot;+jo.get(&quot;cost&quot;)+&quot;  != 0&quot;;
+	     	log.info(FailureMessage);
+	     	System.out.println(FailureMessage);}
+
+// Delivery only
+	}if(!${is_collect1})
+				
+		if(jo.get(&quot;code&quot;).equals(&quot;WE&quot;)){
+			if(jo.get(&quot;cost&quot;)== 100)
+				{// weekend R100
+
+				if(jo.get(&quot;name&quot;).equals(&quot;Guaranteed Weekend - Saturday&quot;)){
+				System.out.println(&quot;PASS - Weekend SAT  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));	}
+				
+				else if(jo.get(&quot;name&quot;).equals(&quot;Guaranteed Weekend - Sunday&quot;)){
+				System.out.println(&quot;PASS - Weekend SUN  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));	}
+		
+				}
+				else{
+					System.out.println(&quot;FAIL - WE cost:&quot;+jo.get(&quot;cost&quot;)+&quot; incorrect!&quot;);}
+		}
+		else if(jo.get(&quot;code&quot;).equals(&quot;EX&quot;)){
+			if(jo.get(&quot;cost&quot;)== 95)
+				{System.out.println(&quot;PASS - Next day  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));	}
+				else{
+					System.out.println(&quot;FAIL - EX cost:&quot;+jo.get(&quot;cost&quot;)+&quot; incorrect!&quot;);}
+		}
+		
+		else if(jo.get(&quot;code&quot;).equals(&quot;SD&quot;)){
+			if(jo.get(&quot;cost&quot;)== 120)
+				{System.out.println(&quot;PASS - Same day  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));	}
+				else{
+					System.out.println(&quot;FAIL - SD cost:&quot;+jo.get(&quot;cost&quot;)+&quot; incorrect!&quot;);}
+		}
+		else if(jo.get(&quot;code&quot;).equals(&quot;ST&quot;)){
+			
+			if(jo.get(&quot;cost&quot;)== 60)
+				{
+					//m=&quot;\n\n&quot;+jo.get(&quot;code&quot;)+&quot;  == Standard \n&quot;+jo.get(&quot;cost&quot;)+&quot;  === 60&quot;;log.info(m);System.out.println(m);
+				// cost should only be 60 if.
+				if(vars.getObject(&quot;price&quot;) &lt; 450){
+					//true &lt; threshold
+					System.out.println(&quot;PASS - Standard R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+					}
+				else if(${product}==59723050){
+					//true for white goods
+					System.out.println(&quot;PASS - Standard White-Goods   R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+				}
+			else {
+					// bug
+					Failure=true;
+     				FailureMessage = &quot;FAIL - Incorrect cost for &quot;+vars.get(&quot;product_type&quot;);
+					System.out.println(&quot;FAIL - Incorrect cost for&quot;+vars.get(&quot;product_type&quot;)); }
+				
+				}
+			else if(jo.get(&quot;cost&quot;)== 0  &amp;&amp; vars.getObject(&quot;price&quot;) &lt; 450){
+					if(vars.get(&quot;customer_id&quot;).equals(&quot;16&quot;)){
+							System.out.println(&quot;PASS - Standard First-time free R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+					}else {
+							System.out.println(&quot;FAIL - Repeat not free / fallback  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+						}
+					
+					}
+			else if(jo.get(&quot;cost&quot;)== 0  &amp;&amp; vars.getObject(&quot;price&quot;) &gt;= 450){
+					if(vars.get(&quot;customer_id&quot;).equals(&quot;16&quot;)){
+							System.out.println(&quot;PASS - Standard First-time free R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+					}else {
+							System.out.println(&quot;PASS - Standard Over Threshold  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+						}
+					
+					}
+				
+		}
+		
+		else {
+		Failure=true;
+     	FailureMessage = &quot;\n&quot;+jo.get(&quot;name&quot;)+&quot; for &quot;+jo.get(&quot;code&quot;)+&quot; ---&gt; incorrect&quot;;System.out.println(FailureMessage);}
+		
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//String str_response = ;
+	//JSONParser parser = new JSONParser();
+	JSONObject jsonObject = (JSONObject)(new JSONParser()).parse(SampleResult.getResponseDataAsString());
+	JSONArray jsonArray = jsonObject.get(&quot;resources&quot;);
+		if(jsonArray.size()&gt;1)
+			{
+				//m =&quot;\n\n Delivery shipping plans = &quot;+jsonArray.size(); System.out.println(m); 
+				}  
+			
+		else if(jsonArray.size()==1)
+			{
+				if(delivery_method.get(2)==1){
+				System.out.println(&quot;--Digital delivery is available ---&quot;);
+				// test digital items delivery charge
+				}
+				else if(delivery_method.get(0)==1){
+				System.out.println(&quot;--Collect is available ---&quot;);
+				// test digital items delivery charge
+				
+				
+				}
+				else if(delivery_method.get(1)==1){
+				System.out.println(&quot;--Delivery is available ---&quot;);
+				// test digital items delivery charge
+				}
+				
+			}
+		else{m=&quot;\n\n Not enough Shipping options --&gt; &quot;+jsonArray.size();System.out.println(m);
+			Failure=true;
+     		FailureMessage = &quot;\n\n Not enough Shipping options\n&quot;;System.out.println(FailureMessage);
+		} 
+			
+
+		for(int i=0 ; i&lt; jsonArray.size(); i++){
+			assertEquals(jsonArray.get(i));
+			}
+			</stringProp>
+              <stringProp name="BeanShellAssertion.filename"></stringProp>
+              <stringProp name="BeanShellAssertion.parameters"></stringProp>
+              <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+            </BeanShellAssertion>
+            <hashTree/>
+          </hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${collect_string}  ${product_type}  @ R${price}" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+    &quot;products&quot;: [&#xd;
+        {&quot;product_id&quot;: ${product_0}, &quot;qty&quot;: 1}&#xd;
+        ,&#xd;
+        {&quot;product_id&quot;: ${product_1}, &quot;qty&quot;: 1}&#xd;
+&#xd;
+&#xd;
+    ],&#xd;
+    &quot;products_total&quot;: ${price},&#xd;
+    &quot;sales_region&quot;: &quot;CPT&quot;,&#xd;
+    &quot;payment_method&quot;: &quot;COD&quot;,&#xd;
+    &quot;is_personalised&quot;: ${is_personalised},&#xd;
+    &quot;is_risky&quot;: ${is_risky},&#xd;
+    &quot;customer_id&quot;:  ${customer_id},&#xd;
+    &quot;address_id&quot;: &quot;${woodstock}&quot;,&#xd;
+    &quot;is_collect&quot;: ${is_collect1},&#xd;
+    &quot;branch_code&quot;: &quot;GAR&quot;&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">${environment}</stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">products</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Content-Type</stringProp>
+                  <stringProp name="Header.value">application/json</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="Total_Price Initialiser" enabled="true">
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="script">//initialise price conversion
+vars.put(&quot;price1&quot;,vars.getObject(&quot;price_&quot;+vars.get(&quot;price-index&quot;)));
+vars.putObject(&quot;price&quot;,Integer.parseInt(vars.get(&quot;price1&quot;)));
+
+	
+if(vars.getObject(&quot;is_collect1&quot;)){
+	vars.put(&quot;collect_string&quot;,&quot;Collectable -&quot;);
+	//log.info(&quot;\n\n is collactable&quot;);
+
+
+}else if(!vars.getObject(&quot;is_collect1&quot;)){
+	vars.put(&quot;collect_string&quot;,&quot;Delivery -&quot;);
+	//log.info(&quot;\n\n not collactable&quot;);
+}
+
+//System.out.println(${collect_string}+&quot; WG @ R&quot;+${price});</stringProp>
+            </BeanShellPreProcessor>
+            <hashTree/>
+            <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Reset Price Control" enabled="true">
+              <stringProp name="BeanShellAssertion.query">int temp =Integer.parseInt(vars.get(&quot;price-index&quot;));
+if(temp &lt;= 2){
+temp=temp+1;
+	vars.put(&quot;price-index&quot;,&quot;&quot;+temp);
+}
+if(temp==3){
+	vars.putObject(&quot;price-loop&quot;,&quot;false&quot;);
+	}
+	
+//String m =&quot; \n reset price index&quot;+temp +&quot;\n&quot;;
+	//System.out.println(m);
+	//log.info(m);</stringProp>
+              <stringProp name="BeanShellAssertion.filename"></stringProp>
+              <stringProp name="BeanShellAssertion.parameters"></stringProp>
+              <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+            </BeanShellAssertion>
+            <hashTree/>
+            <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Test Promise dates" enabled="true">
+              <stringProp name="BeanShellAssertion.query">import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+
+String m =&quot;&quot;;
+
+    	ArrayList delivery_method = vars.getObject(&quot;method&quot;);  // [ collect , courier, digital ]  
+
+public static void assertEquals(JSONObject jo){
+
+	 if(jo.get(&quot;code&quot;).equals(&quot;ST&quot;)){
+			if(jo.get(&quot;not_after&quot;).equals(vars.get(&quot;promisedate_collect&quot;)))
+				{
+					m=&quot;\n\nPASS - Standard Promise date &quot;+jo.get(&quot;not_after&quot;)+&quot;  = &quot;+vars.get(&quot;promisedate_collect&quot;)+&quot;&quot;;log.info(m);
+					System.out.println(m);
+				}
+			 else {
+				Failure=true;
+		     	FailureMessage = &quot;\n\nFAIL - Standard Promise date &apos;&quot;+jo.get(&quot;not_after&quot;)+&quot;&apos; != Promise date&apos;&quot;+vars.get(&quot;promisedate_collect&quot;)+&quot;&apos;&quot;; 
+		     	System.out.println(FailureMessage);}		
+	}
+	else if(jo.get(&quot;code&quot;).equals(&quot;EC&quot;))
+		{
+			log.info(&quot;\n\n 3 \n&quot;);
+			if(jo.get(&quot;not_after&quot;).equals(vars.get(&quot;promisedate_collect&quot;)))
+				{
+					m=&quot;\n\nPASS - Standard Promise date &quot;+jo.get(&quot;not_after&quot;)+&quot;  = &quot;+vars.get(&quot;promisedate_collect&quot;)+&quot;&quot;;log.info(m);
+					System.out.println(m);
+				}
+			 else {
+				Failure=true;
+		     	FailureMessage = &quot;\n\nFAIL - Collect promise date&apos;&quot;+jo.get(&quot;not_after&quot;)+&quot;&apos; != Promise date&apos;&quot;+vars.get(&quot;promisedate_collect&quot;)+&quot;&apos;&quot;; 
+		     	System.out.println(FailureMessage);}	
+		
+		}else{System.out.println(jo.get(&quot;code&quot;)+&quot; : code was not found&quot;);}
+	}
+
+
+	//String str_response = ;
+	//JSONParser parser = new JSONParser();
+	
+	JSONObject jsonObject = (JSONObject)(new JSONParser()).parse(SampleResult.getResponseDataAsString());
+	JSONArray jsonArray;
+	if(${is_collect1}){
+		//int i =0;
+	//for(Iteraor key=json.org.json.JSONObject.keys(); key.hasNext();) {
+	  //  i=i+1;
+	    
+	//}
+		if(jsonObject.size()==2){
+				log.info(&quot;\n\n server error \n&quot;);
+				log.info(JSONObject.getNames(jsonObject)+&quot;\n&quot;);
+			}else if(jsonObject.size()&gt;2){
+			log.info(&quot;\n\n normal options \n&quot;);
+			}
+
+
+
+
+
+
+
+			
+			if(jsonObject.get(&quot;message&quot;).equals(&quot;Server Error&quot;)){
+				//System.out.println(&quot;FAIL - Collection not available&quot;);
+			}else{
+	log.info(&quot;\n\n  1 \n&quot;);
+				 jsonArray = jsonObject.get(&quot;resources&quot;);
+	log.info(&quot;\n\n  2 \n&quot;);
+				assertEquals(jsonArray.get(0));
+	log.info(&quot;\n\n 0 \n&quot;);
+			}
+	}else{
+	log.info(&quot;\n\n 5 \n&quot;);
+			for(int i=0 ; i&lt; jsonArray.size(); i++){
+			assertEquals(jsonArray.get(i));
+			}
+		}
+			
+	//JSONObject jsonObject = (JSONObject)(new JSONParser()).parse(SampleResult.getResponseDataAsString());
+	//JSONArray jsonArray = jsonObject.get(&quot;resources&quot;);
+			//if(${is_collect1}){
+
+			//assertEquals(jsonArray.get(0));
+			//log.info(&quot;\n\njsonArray.get(0) : &quot;+jsonArray.get(0)+&quot;\n\n&quot;);
+			//}
+			//else{
+			//	for(int i=0 ; i&lt; jsonArray.size(); i++){
+			//	assertEquals(jsonArray.get(i));
+			//	}
+			//}
+	
+
+	
+			
+
+
+			</stringProp>
+              <stringProp name="BeanShellAssertion.filename"></stringProp>
+              <stringProp name="BeanShellAssertion.parameters"></stringProp>
+              <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+            </BeanShellAssertion>
+            <hashTree/>
+            <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="Test Cases" enabled="true">
+              <stringProp name="BeanShellAssertion.query">import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+String m =&quot;&quot;;
+
+//vars.put(&quot;price1&quot;,vars.getObject(&quot;price_&quot;+vars.get(&quot;price-index&quot;)));
+//vars.putObject(&quot;price&quot;,Integer.parseInt(vars.get(&quot;price1&quot;)));
+
+    	ArrayList delivery_method = vars.getObject(&quot;method&quot;);  // [ collect , courier, digital ]  
+
+public static void assertEquals(JSONObject jo){
+	// Collect only
+	if(${is_collect1}){
+		if(!(delivery_method.get(0)==1)){
+			System.out.println(&quot;FAIL--Not collectable !---&quot;); Failure=true; FailureMessage =&quot;--Not collectable !---&quot;;
+			}
+		if(jo.get(&quot;name&quot;).equals(&quot;Collect - CPT&quot;)  &amp;&amp; jo.get(&quot;cost&quot;)== 0){
+			Failure=false; m=&quot;\n\n PASS &quot;+jo.get(&quot;name&quot;)+&quot;\t&quot;+jo.get(&quot;cost&quot;)+&quot;  ======== 0&quot;;
+			log.info(m);System.out.println(m);
+			}
+		else { 
+			Failure=true;
+	     	FailureMessage = &quot;\n\n FAIL &quot;+jo.get(&quot;name&quot;)+&quot;  != Collect - CPT&quot;+jo.get(&quot;cost&quot;)+&quot;  != 0&quot;;
+	     	log.info(FailureMessage);
+	     	System.out.println(FailureMessage);}
+
+// Delivery only
+	}if(${is_collect1}==false)
+				
+		if(jo.get(&quot;code&quot;).equals(&quot;WE&quot;)){
+			if(jo.get(&quot;cost&quot;)== 100)
+				{// weekend R100
+
+				if(jo.get(&quot;name&quot;).equals(&quot;Guaranteed Weekend - Saturday&quot;)){
+				System.out.println(&quot;PASS - Weekend SAT  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));	}
+				
+				else if(jo.get(&quot;name&quot;).equals(&quot;Guaranteed Weekend - Sunday&quot;)){
+				System.out.println(&quot;PASS - Weekend SUN  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));	}
+		
+				}
+				else{
+					System.out.println(&quot;FAIL - WE cost:&quot;+jo.get(&quot;cost&quot;)+&quot; incorrect!&quot;);}
+		}
+		else if(jo.get(&quot;code&quot;).equals(&quot;EX&quot;)){
+			if(jo.get(&quot;cost&quot;)== 95)
+				{System.out.println(&quot;PASS - Next day  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));	}
+				else{
+					System.out.println(&quot;FAIL - EX cost:&quot;+jo.get(&quot;cost&quot;)+&quot; incorrect!&quot;);}
+		}
+		
+		else if(jo.get(&quot;code&quot;).equals(&quot;SD&quot;)){
+			if(jo.get(&quot;cost&quot;)== 120)
+				{System.out.println(&quot;PASS - Same day  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));	}
+				else{
+					System.out.println(&quot;FAIL - SD cost:&quot;+jo.get(&quot;cost&quot;)+&quot; incorrect!&quot;);}
+		}
+		else if(jo.get(&quot;code&quot;).equals(&quot;ST&quot;)){
+			
+			if(jo.get(&quot;cost&quot;)== 60)
+				{
+					//m=&quot;\n\n&quot;+jo.get(&quot;code&quot;)+&quot;  == Standard \n&quot;+jo.get(&quot;cost&quot;)+&quot;  === 60&quot;;log.info(m);System.out.println(m);
+				// cost should only be 60 if.
+				if(vars.getObject(&quot;price&quot;) &lt; 450){
+					//true &lt; threshold
+					System.out.println(&quot;PASS - Standard R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+					}
+				else if(${product}==59723050){
+					//true for white goods
+					System.out.println(&quot;PASS - Standard White-Goods   R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+				}
+			else {
+					// bug
+					Failure=true;
+     				FailureMessage = &quot;FAIL - Incorrect cost for &quot;+vars.get(&quot;product_type&quot;);
+					System.out.println(&quot;FAIL - Incorrect cost for&quot;+vars.get(&quot;product_type&quot;)); }
+				
+				}
+			else if(jo.get(&quot;cost&quot;)== 0  &amp;&amp; vars.getObject(&quot;price&quot;) &lt; 450){
+					if(vars.get(&quot;customer_id&quot;).equals(&quot;16&quot;)){
+							System.out.println(&quot;PASS - Standard First-time free R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+					}else {
+							System.out.println(&quot;FAIL - Repeat not free / fallback  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+						}
+					
+					}
+			else if(jo.get(&quot;cost&quot;)== 0  &amp;&amp; vars.getObject(&quot;price&quot;) &gt;= 450){
+					if(vars.get(&quot;customer_id&quot;).equals(&quot;16&quot;)){
+							System.out.println(&quot;PASS - Standard First-time free R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+					}else {
+							System.out.println(&quot;PASS - Standard Over Threshold  R&quot;+jo.get(&quot;cost&quot;)+&quot; ~R&quot;+vars.get(&quot;price&quot;));
+						}
+					
+					}
+				
+		}
+		
+		else {
+		Failure=true;
+     	FailureMessage = &quot;\n&quot;+jo.get(&quot;name&quot;)+&quot; for &quot;+jo.get(&quot;code&quot;)+&quot; ---&gt; incorrect&quot;;System.out.println(FailureMessage);}
+		
+}
+
+
+
+
+
+
+
+
+
+JSONObject jsonObject = (JSONObject)(new JSONParser()).parse(SampleResult.getResponseDataAsString());
+	if(${is_collect1}){
+			if(jsonObject.get(&quot;message&quot;).equals(&quot;Server Error&quot;)){
+				//System.out.println(&quot;FAIL - Collection not available&quot;);
+			}else{
+			
+				JSONArray jsonArray = jsonObject.get(&quot;resources&quot;);
+				assertEquals(jsonArray.get(0));
+			}
+	}else{
+			for(int i=0 ; i&lt; jsonArray.size(); i++){
+			assertEquals(jsonArray.get(i));
+			}
+		}
+	
+
+
+
+
+
+
+
+
+
+	//String str_response = ;
+	//JSONParser parser = new JSONParser();
+	
+	/* JSONObject jsonObject = (JSONObject)(new JSONParser()).parse(SampleResult.getResponseDataAsString());
+	JSONArray jsonArray = jsonObject.get(&quot;resources&quot;);
+		if(jsonArray.size()&gt;1)
+			{
+				//m =&quot;\n\n Delivery shipping plans = &quot;+jsonArray.size(); System.out.println(m); 
+				}  
+			
+		else if(jsonArray.size()==1)
+			{
+				if(delivery_method.get(2)==1){
+				System.out.println(&quot;--Digital delivery is available ---&quot;);
+				// test digital items delivery charge
+				}
+				else if(delivery_method.get(0)==1){
+				System.out.println(&quot;--Collect is available ---&quot;);
+				// test digital items delivery charge
+				
+				
+				}
+				else if(delivery_method.get(1)==1){
+				System.out.println(&quot;--Delivery is available ---&quot;);
+				// test digital items delivery charge
+				}
+				
+			}
+		else{m=&quot;\n\n Not enough Shipping options --&gt; &quot;+jsonArray.size();System.out.println(m);
+			Failure=true;
+     		FailureMessage = &quot;\n\n Not enough Shipping options\n&quot;;System.out.println(FailureMessage);
+		} 
+			
+
+		for(int i=0 ; i&lt; jsonArray.size(); i++){
+			assertEquals(jsonArray.get(i));
+			}
+
+			*/
+
+
+			</stringProp>
+              <stringProp name="BeanShellAssertion.filename"></stringProp>
+              <stringProp name="BeanShellAssertion.parameters"></stringProp>
+              <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+            </BeanShellAssertion>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
