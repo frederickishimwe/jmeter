@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1 align="center"><img src="" alt="Apache JMeter for exploratory testing" /></h1>
 <h4 align="center">Open Source application designed to load test applications and measure performance. By The Apache Software Foundation</h4>
 <br>
@@ -15,3 +16,6 @@ This is just a baremetal used in my local environment for testing
 
 
 **Thank you for using Apache JMeter.**
+=======
+# jmeter
+>>>>>>> fe369b21766c602d63e675cec270f59a53103fc4
