@@ -1,5 +1,5 @@
 
-<h1 align="center">< alt="Apache JMeter for exploratory testing" /></h1>
+<h1 align="center"> "Apache JMeter for exploratory testing" </h1>
 <h4 align="center">Open Source application designed to load test applications and measure performance. By The Apache Software Foundation</h4>
 <br>
 
